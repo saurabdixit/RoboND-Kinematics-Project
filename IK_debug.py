@@ -249,5 +249,9 @@ def test_code(test_case):
 if __name__ == "__main__":
     # Change test case number for different scenarios
     #test_case_number = 1
-    for test_case_number in range(1,6):
+    for test_case_number in range(1,4):
+        print '--------------------------------------------------------------------------------'
+        print 'Running test case number: ',test_case_number
+        print '--------------------------------------------------------------------------------'
+        print
         test_code(test_cases[test_case_number])
