@@ -1,0 +1,33 @@
+rosservice call /calculate_ik "poses: 
+- position: 
+    x: 2.16135
+    y: -1.42635 
+    z: 1.55109 
+  orientation: 
+    x: 0.708611 
+    y: 0.186356 
+    z: -0.157931 
+    w: 0.661967" 
+
+
+rosservice call /calculate_ik "poses: 
+- position: 
+    x: -0.56754 
+    y: 0.93663 
+    z: 3.0038 
+  orientation: 
+    x: 0.62073 
+    y: 0.48318 
+    z: 0.38759 
+    w: 0.480629" 
+
+rosservice call /calculate_ik "poses: 
+- position: 
+    x: -1.3863 
+    y: 0.02074 
+    z: 0.90986 
+  orientation: 
+    x: 0.01735 
+    y: -0.2179 
+    z: 0.9025 
+    w: 0.371016" 

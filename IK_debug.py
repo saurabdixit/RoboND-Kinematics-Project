@@ -1,6 +1,6 @@
 from sympy import *
 from time import time
-from mpmath import radians
+from mpmath import radians,pi
 import tf
 
 '''
@@ -181,6 +181,10 @@ def test_code(test_case):
     theta4 = atan2(R3_6[2,2], -R3_6[0,2])
     theta5 = atan2(sqrt(R3_6[0,2]**2 + R3_6[2,2]**2), R3_6[1,2])
     theta6 = atan2(-R3_6[1,1], R3_6[1,0])
+
+
+    print ''
+    print 'joint Angles: ',theta1,theta2,theta3,theta4,theta5,theta6
 
     ## 
     ########################################################################################
