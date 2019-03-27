@@ -15,7 +15,7 @@ import tf
 from kuka_arm.srv import *
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from geometry_msgs.msg import Pose
-from mpmath import *
+from mpmath import radians
 from sympy import *
 
 
@@ -74,8 +74,8 @@ def handle_calculate_IK(req):
 
 	T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_E
 
+
         #Get Rotation Matrices from roll-pitch-yaw
-    
         r, p, y = symbols('r p y')
     
         ROT_x = Matrix([[1,      0,       0],
@@ -96,7 +96,6 @@ def handle_calculate_IK(req):
 	Rot_Error = ROT_z.subs(y, radians(180)) * ROT_y.subs(p, radians(-90))
         ROT_EE = ROT_EE * Rot_Error
 
-	#Defining some matrices which we will need in for loop
 
         # Initialize service response
         joint_trajectory_list = []
@@ -150,7 +149,11 @@ def handle_calculate_IK(req):
 
 	    R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3]* T2_3[0:3,0:3]
             R0_3 = R0_3.evalf(subs = {q1: theta1, q2: theta2, q3: theta3})
-            R3_6 = R0_3.inv("LU") * ROT_EE
+
+
+            # As per rotation matrix property, inverse of rotation matrix is equal to its transpose.
+            R3_6 = R0_3.T * ROT_EE
+            #print(R3_6)
 
             theta4 = atan2(R3_6[2,2], -R3_6[0,2])
             theta5 = atan2(sqrt(R3_6[0,2]**2 + R3_6[2,2]**2), R3_6[1,2])
@@ -160,7 +163,7 @@ def handle_calculate_IK(req):
             # Populate response for the IK request
             # In the next line replace theta1,theta2...,theta6 by your joint angle variables
 	    joint_trajectory_point.positions = [theta1, theta2, theta3, theta4, theta5, theta6]
-            print joint_trajectory_point.positions
+            #print joint_trajectory_point.positions
 	    joint_trajectory_list.append(joint_trajectory_point)
 
         rospy.loginfo("length of Joint Trajectory List: %s" % len(joint_trajectory_list))
