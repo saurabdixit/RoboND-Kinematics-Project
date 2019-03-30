@@ -172,10 +172,19 @@ def handle_calculate_IK(req):
 
 def IK_server():
     # initialize node and declare calculate_ik service
-    rospy.init_node('IK_server')
-    s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
-    print "Ready to receive an IK request"
-    rospy.spin()
+    if rospy.get_param('/trajectory_sampler/demo'):
+        print '-------------------------------------------------------------------------------'
+        print 'Not starting IK Server as the /trajectory_sampler/demo parameter is set to TRUE'
+        print '-------------------------------------------------------------------------------'
+        pass
+    else:
+        print '-------------------------------------------------------------------------------'
+        print '/trajectory_sampler/demo parameter is set to FALSE. Initiating IK Server-------'
+        print '-------------------------------------------------------------------------------'
+        rospy.init_node('IK_server')
+        s = rospy.Service('calculate_ik', CalculateIK, handle_calculate_IK)
+        print "Ready to receive an IK request"
+        rospy.spin()
 
 if __name__ == "__main__":
     IK_server()
