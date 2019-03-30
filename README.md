@@ -6,7 +6,7 @@ Welcome to the implementation of Autonomous Pick and Place operation!
 ---
 
 
-**Steps to complete the project:**  
+**Steps to review the project:**  
 
 
 1. Set up your ROS Workspace.
@@ -16,8 +16,8 @@ Welcome to the implementation of Autonomous Pick and Place operation!
 ```Shell
 rosrun kuka_arm safe_spawnder.sh
 ```
-...Note: The IK_Server.py will run automatically once you run above command. No need to run it separately! I have added the run command in the inveser_kinematics.launch.
-...In code, I am checking whether the "demo" parameter value is set to TRUE or FALSE. Based on the value, I am making the decision whether to initiate the service or not
+⋅⋅⋅Note: The IK_Server.py will run automatically once you run above command. No need to run it separately! I have added the run command in the inveser_kinematics.launch.
+⋅⋅⋅In code, I am checking whether the "demo" parameter value is set to TRUE or FALSE. Based on the value, I am making the decision whether to initiate the service or not
 ```python
 def IK_server():
     # initialize node and declare calculate_ik service
