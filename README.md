@@ -1,7 +1,12 @@
 ## Project: Kinematics Pick & Place
 Welcome to the implementation of Autonomous Pick and Place operation!
 
-![](./misc_images/AutonomousPickAndPlace.png)
+[//]: # (Image References)
+[image1]: ./misc_images/AutonomousPickAndPlace.png
+[image2]: ./misc_images/misc1.png
+[image3]: ./misc_images/misc2.png
+
+![][image1]
 
 ---
 
@@ -16,7 +21,7 @@ Welcome to the implementation of Autonomous Pick and Place operation!
    ```Shell
    rosrun kuka_arm safe_spawnder.sh
    ```
-   Note: The IK_Server.py will run automatically once you run above command. No need to run it separately! I have added the run command in the inveser_kinematics.launch.
+   Note: The IK_Server.py will run automatically once you run above command. No need to run it separately! I have added the run command in the inverse_kinematics.launch.
    In code, I am checking whether the "demo" parameter value is set to TRUE or FALSE. Based on the value, I am making the decision whether to initiate the service or not
    ```python
    def IK_server():
@@ -35,31 +40,31 @@ Welcome to the implementation of Autonomous Pick and Place operation!
            print "Ready to receive an IK request"
            rospy.spin()
    ```
-5. Once the environment is loaded, you can continue clicking next to see the result
+5. Once the environment is loaded, you can continue clicking next to see the result.
 
 
-[//]: # (Image References)
-
-[image1]: ./misc_images/misc1.png
-[image2]: ./misc_images/misc3.png
-[image3]: ./misc_images/misc2.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/972/view) Points
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  
-
-You're reading it!
+This section documents the process of Kinematic Analysis and project implementation.
 
 ### Kinematic Analysis
 #### 1. Run the forward_kinematics demo and evaluate the kr210.urdf.xacro file to perform kinematic analysis of Kuka KR210 robot and derive its DH parameters.
+Here is the Joint diagram for Kr210 robot.
 
-Here is an example of how to include an image in your writeup.
+![alt text][image2]
 
-![alt text][image1]
+From the image above, the DH parameter table can be derived as follows:
+
+
+We need to get the parameter values of d1, d4, dG, a2, and a3. We got following values from urdf file:
+Parameters | Values
+d1 | 
+a2 |
+a3 |
+d4 |
+dG | 
+
+
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
