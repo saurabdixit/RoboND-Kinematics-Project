@@ -3,7 +3,7 @@ Welcome to the implementation of Autonomous Pick and Place operation!
 
 [//]: # (Image References)
 [image1]: ./misc_images/AutonomousPickAndPlace.png
-[image2]: ./misc_images/misc1.png
+[image2]: ./misc_images/DHParameterSupportingImage.jpg
 [image3]: ./misc_images/misc2.png
 
 ![][image1]
