@@ -74,6 +74,7 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 In above table, we have some variable terms i.e. thetas and constant terms a1, a2, a3, d1, d4, and dG. All the thetas are the joint angles around z-axis. These are the one which will decide the position of end effector relative to robot base. Let's keep that variable in the equation so that if we need to we can get the end effector position when we plug in the value of theta. In code, we are using symbol q1,...,q7 in place of thetas. We can get values of the constant from urdf file. Here are the values:
 
 Parameters 	| Values
+---			| ---
 a1			| 0.35
 a2 			| 1.25
 a3 			| -0.054
@@ -141,13 +142,15 @@ From above calculation, we can find the values of all joint angles.
 ### Project Implementation
 I have updated IK_server.py with the Forward Kinematics and inverse kinematics that we have discussed previously. I am populating the matrices before the for loop so that we can save some computation. The only calculation that are performed inside the for loop are dependent on wrist position and orientation that is sent when rosservice call is made.
 
-There is one important change I made in following formula:
+I am not using Inverse for the calculation of R3_6.
 ![alt text][image5]
 
-I am using transpose instead of Inverse because as per property of rotation matrix, inverse is equal to transpose of the rotation matrix.
+I am using transpose instead of Inverse.
 ```python
 R3_6 = R0_3.T * ROT_EE
 ```
+
+The reason I am mentioning this is because I was getting some inconsistent results before making this change.
 
 
 
