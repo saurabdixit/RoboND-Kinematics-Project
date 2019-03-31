@@ -138,7 +138,7 @@ def handle_calculate_IK(req):
             
             angle_a = acos((side_b**2 + side_c**2 - side_a**2) / (2 * side_b * side_c))
             angle_b = acos((side_a**2 + side_c**2 - side_b**2) / (2 * side_a * side_c))
-            angle_c = acos((side_a**2 + side_b**2 - side_c**2) / (2 * side_b * side_c))
+            angle_c = acos((side_a**2 + side_b**2 - side_c**2) / (2 * side_a * side_b))
 
 
 
