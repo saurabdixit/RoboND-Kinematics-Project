@@ -3,7 +3,7 @@ Welcome to the implementation of Autonomous Pick and Place operation!
 
 [//]: # (Image References)
 [image1]: ./misc_images/AutonomousPickAndPlace.png
-[image2]: ./misc_images/DHParameterSupportingImage.jpg
+[image2]: ./misc_images/DHParameterSupportingImage.jpeg
 [image3]: ./misc_images/misc2.png
 
 ![][image1]
@@ -17,12 +17,15 @@ Welcome to the implementation of Autonomous Pick and Place operation!
 1. Set up your ROS Workspace.
 2. Download or clone the [project repository](https://github.com/saurabdixit/RoboND-Kinematics-Project.git) into the ***src*** directory of your ROS Workspace.  
 3. Perform catkin_make after cloning.
-4. After catkin_make, Run following command:
+4. After catkin_make, run following command:
+
    ```Shell
    rosrun kuka_arm safe_spawnder.sh
    ```
-   Note: The IK_Server.py will run automatically once you run above command. No need to run it separately! I have added the run command in the inverse_kinematics.launch.
-   In code, I am checking whether the "demo" parameter value is set to TRUE or FALSE. Based on the value, I am making the decision whether to initiate the service or not
+
+   Note: IK_Server.py will run automatically once you run above command. I have added the IK_server node in inverse_kinematics.launch.
+
+   In code, I am checking whether the "demo" parameter value is set to TRUE or FALSE. Based on the value, I am making the decision whether to initialize the node or not.
    ```python
    def IK_server():
        # initialize node and declare calculate_ik service
@@ -40,7 +43,8 @@ Welcome to the implementation of Autonomous Pick and Place operation!
            print "Ready to receive an IK request"
            rospy.spin()
    ```
-5. Once the environment is loaded, you can continue clicking next to see the result.
+
+5. Once the environment is loaded, please continue clicking next to see the robot performing autonomous pick and place
 
 
 
@@ -55,6 +59,15 @@ Here is the Joint diagram for Kr210 robot.
 
 From the image above, the DH parameter table can be derived as follows:
 
+Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
+---   | --- 	   | --- 	| --- 	 | ---
+0->1  | 0 		   | 0 		| d1 	 | qi
+1->2  | - pi/2     | a2 	| 0 	 | -pi/2 + q2
+2->3  | 0  		   | 0 		| 0 	 | 0
+3->4  | 0 		   | 0 		| 0 	 | 0
+4->5  | 0 		   | 0 		| 0 	 | 0
+5->6  | 0 		   | 0 		| 0 	 | 0
+6->EE | 0 		   | 0 		| 0 	 | 0
 
 We need to get the parameter values of d1, d4, dG, a2, and a3. We got following values from urdf file:
 Parameters | Values
@@ -68,15 +81,6 @@ dG |
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
---- | --- | --- | --- | ---
-0->1 | 0 | 0 | L1 | qi
-1->2 | - pi/2 | L2 | 0 | -pi/2 + q2
-2->3 | 0 | 0 | 0 | 0
-3->4 |  0 | 0 | 0 | 0
-4->5 | 0 | 0 | 0 | 0
-5->6 | 0 | 0 | 0 | 0
-6->EE | 0 | 0 | 0 | 0
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
